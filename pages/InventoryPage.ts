@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import type { Page, Locator } from '@playwright/test';
 import { HeaderComponent } from './components/HeaderComponent.js';
 
 export class InventoryPage {
@@ -20,6 +20,10 @@ export class InventoryPage {
   async removeItemFromCart(productName: string): Promise<void> {
     const item = this.inventoryItems.filter({ hasText: productName });
     await item.getByRole('button', { name: 'Remove' }).click();
+  }
+
+  getItemButton(productName: string): Locator {
+    return this.inventoryItems.filter({ hasText: productName }).getByRole('button');
   }
 
   async goToCart(): Promise<void> {

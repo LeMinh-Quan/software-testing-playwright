@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import type { Page, Locator } from '@playwright/test';
 
 export class LoginPage {
   readonly page: Page;
@@ -16,7 +16,7 @@ export class LoginPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto('https://www.saucedemo.com');
+    await this.page.goto('/');
   }
 
   async login(username: string, password: string): Promise<void> {
