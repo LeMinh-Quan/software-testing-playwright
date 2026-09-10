@@ -87,4 +87,8 @@ test.describe('WBS 3.1: Web UI Test Suite - E2E Checkout Flow', () => {
     expect(await inventoryPage.header.getCartCount()).toBe(1);
     await expect(inventoryPage.getItemButton('Sauce Labs Backpack')).toHaveText('Remove');
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 17c1acf880b9c4d654bb936a070cb9bad37a7e9c

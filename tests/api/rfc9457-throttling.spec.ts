@@ -43,10 +43,10 @@ test.describe("WBS 2.4: RFC 9457 Problem Details & Rate Limiting Throttler", () 
     let lastResponse;
 
     // Bắn liên tiếp các request sai thông tin để kích hoạt Throttler Guard
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
       lastResponse = await request.post("/auth/login", {
         data: {
-          email: "brute_force_test@example.com",
+          email: `brute_force_${i}@example.com`,
           password: "wrong_password",
         },
       });
@@ -79,7 +79,7 @@ test.describe("WBS 2.4: RFC 9457 Problem Details & Rate Limiting Throttler", () 
 
     // 1. Bắn request để ép rơi vào trạng thái 429
     let res;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
       res = await request.post("/auth/login", {
         data: {
           email: "cooldown_test@example.com",
@@ -95,11 +95,10 @@ test.describe("WBS 2.4: RFC 9457 Problem Details & Rate Limiting Throttler", () 
       headers["retry-after-auth"] ?? headers["retry-after"] ?? 60;
     const waitSeconds = parseInt(retryAfterHeader, 10) || 60;
 
-    // chờ hết thời gian phạt
-    await new Promise((resolve) =>
-      setTimeout(resolve, (waitSeconds + 1) * 1000),
-    );
-
+    // Chờ hết thời gian phạt cộng thêm 3s buffer bù trừ chênh lệch đồng hồ mạng
+    const { promise, resolve } = Promise.withResolvers<void>();
+    setTimeout(resolve, (waitSeconds + 3) * 1000);
+    await promise;
     // xác nhận
     const recoveryRes = await request.post("/auth/login", {
       data: { email: "cooldown_test@example.com", password: "wrong_password" },
