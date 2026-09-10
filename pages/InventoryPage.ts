@@ -22,7 +22,6 @@ export class InventoryPage {
     await item.getByRole('button', { name: 'Remove' }).click();
   }
 
-<<<<<<< HEAD
   getItemButton(productName: string): Locator {
     return this.inventoryItems.filter({ hasText: productName }).getByRole('button');
   }
@@ -31,13 +30,3 @@ export class InventoryPage {
     await this.header.openCart();
   }
 }
-=======
-  async goToCart(): Promise<void> {
-    await this.header.openCart();
-  }
-  
-  getItemButton(productName: string): Locator {
-    return this.inventoryItems.filter({ hasText: productName }).getByRole('button');
-  }
-}
->>>>>>> 17c1acf880b9c4d654bb936a070cb9bad37a7e9c

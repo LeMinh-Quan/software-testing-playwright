@@ -11,9 +11,6 @@
       "@/*": ["./*"]
     }
   },
-<<<<<<< HEAD
-  "include": ["pages/**/*", "tests/**/*", "fixtures/**/*", "utils/**/*", "playwright.config.ts", "eslint.config.ts", "schemas/**/*"]
-=======
   "include": [
     "pages/**/*",
     "tests/**/*",
@@ -21,7 +18,6 @@
     "utils/**/*",
     "playwright.config.ts",
     "eslint.config.ts",
-    "schemas/**/*"
+    "schemas/**/*"  
   ]
->>>>>>> 17c1acf880b9c4d654bb936a070cb9bad37a7e9c
 }
